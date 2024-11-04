@@ -1,4 +1,4 @@
-package com.example.grawkosci;
+package com.example.grawkoci;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -59,24 +59,25 @@ public class MainActivity extends AppCompatActivity {
 
                 int[] liczby = {rad1, rad2, rad3, rad4, rad5};
                 int wynik = 0;
+                int[] count = new int[6]; // Assuming the numbers are between 1 and 6
 
-                // Pętla porównująca liczby
+                // Count the occurrences of each number
                 for (int i = 0; i < liczby.length; i++) {
-                    for (int j = i + 1; j < liczby.length; j++) {
-                        if (liczby[i] == liczby[j]) {
-                            wynik += liczby[i]; // Dodanie wartości liczby do wyniku
-                            break; // Przerwanie wewnętrznej pętli, aby uniknąć dodawania tej samej liczby wielokrotnie
-                        }
-                    }
+                    count[liczby[i] - 1]++;
                 }
 
-                wynik *= 2;
-
+                // Calculate the score based on the occurrences
+                for (int i = 0; i < count.length; i++) {
+                    if (count[i] > 1) {
+                        wynik += (i + 1) * count[i];
+                    }
+                }
 
                 wynik_losowania.setText("Wynik tego losowania: " + wynik);
                 licznik++;
                 liczba_rzutow.setText("Liczba rzutów: " + licznik);
                 updateScore(wynik);
+
             }
         });
 
