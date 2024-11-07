@@ -1,4 +1,4 @@
-package com.example.grawkoci;
+package com.example.grawkosci;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView wynik_gry;
     private TextView liczba_rzutow;
     private Random ra = new Random();
+    int wynik_los = 0;
     int wynik_Gry = 0;
     int licznik = 0;
 
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 rzut5.setText("?");
                 wynik_Gry = 0;
                 licznik = 0;
+                wynik_losowania.setText("Wynik tego losowania: " + wynik_los);
                 wynik_gry.setText("Wynik gry: " + wynik_Gry);
                 liczba_rzutow.setText("Liczba rzutów: " + licznik);
             }
