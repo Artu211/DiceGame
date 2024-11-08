@@ -60,14 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
                 int[] liczby = {rad1, rad2, rad3, rad4, rad5};
                 int wynik = 0;
-                int[] count = new int[6]; // Assuming the numbers are between 1 and 6
+                int[] count = new int[6]; //tablica przechowująca powtórzenia
 
-                // Count the occurrences of each number
+                //tutaj leci przez liczby i dodaje powtórzenia do count
                 for (int i = 0; i < liczby.length; i++) {
                     count[liczby[i] - 1]++;
                 }
 
-                // Calculate the score based on the occurrences
+                // tutaj liczy wynik
                 for (int i = 0; i < count.length; i++) {
                     if (count[i] > 1) {
                         wynik += (i + 1) * count[i];
