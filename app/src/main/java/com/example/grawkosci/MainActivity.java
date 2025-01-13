@@ -4,12 +4,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    private ImageView[] diceViews = new ImageView[5];
+    private int[] pictures = {R.drawable.blank_dice, R.drawable.dice1, R.drawable.dice2, R.drawable.dice3, R.drawable.dice4, R.drawable.dice5, R.drawable.dice6};
+    private TextView dice1, dice2, dice3, dice4, dice5;
+    private int[] DiceResults = new int[5] ;
     private Button button_rzut;
     private Button button_reset;
     private TextView rzut1;
@@ -31,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        diceViews[0] = findViewById(R.id.dice1);
+        diceViews[1] = findViewById(R.id.dice2);
+        diceViews[2] = findViewById(R.id.dice3);
+        diceViews[3] = findViewById(R.id.dice4);
+        diceViews[4] = findViewById(R.id.dice5);
         rzut1 = findViewById(R.id.rzut1);
         rzut2 = findViewById(R.id.rzut2);
         rzut3 = findViewById(R.id.rzut3);
@@ -46,25 +58,27 @@ public class MainActivity extends AppCompatActivity {
         button_rzut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int rad1 = ra.nextInt(6) + 1;
-                rzut1.setText(Integer.toString(rad1));
-                int rad2 = ra.nextInt(6) + 1;
-                rzut2.setText(Integer.toString(rad2));
-                int rad3 = ra.nextInt(6) + 1;
-                rzut3.setText(Integer.toString(rad3));
-                int rad4 = ra.nextInt(6) + 1;
-                rzut4.setText(Integer.toString(rad4));
-                int rad5 = ra.nextInt(6) + 1;
-                rzut5.setText(Integer.toString(rad5));
+
+                for(int i=0; i<5; i++){
+                    DiceResults[i] = ra.nextInt(6) + 1;
+                    diceViews[i].setImageResource(pictures[DiceResults[i]]);
+                }
+
+                // Ustawianie wartości wyrzuconych liczb w odpowiednich polach tekstowych
+                rzut1.setText(String.valueOf(DiceResults[0]));
+                rzut2.setText(String.valueOf(DiceResults[1]));
+                rzut3.setText(String.valueOf(DiceResults[2]));
+                rzut4.setText(String.valueOf(DiceResults[3]));
+                rzut5.setText(String.valueOf(DiceResults[4]));
 
 
-                int[] liczby = {rad1, rad2, rad3, rad4, rad5};
+//                int[] liczby = {rad1, rad2, rad3, rad4, rad5};
                 int wynik = 0;
                 int[] count = new int[6]; //tablica przechowująca powtórzenia
 
                 //tutaj leci przez liczby i dodaje powtórzenia do count
-                for (int i = 0; i < liczby.length; i++) {
-                    count[liczby[i] - 1]++;
+                for (int i = 0; i < DiceResults.length; i++) {
+                    count[DiceResults[i] - 1]++;
                 }
 
                 // tutaj liczy wynik
@@ -95,6 +109,13 @@ public class MainActivity extends AppCompatActivity {
                 wynik_losowania.setText("Wynik tego losowania: " + wynik_los);
                 wynik_gry.setText("Wynik gry: " + wynik_Gry);
                 liczba_rzutow.setText("Liczba rzutów: " + licznik);
+
+
+                // Ustawienie obrazków na blank_dice
+                for (ImageView diceView : diceViews) {
+                    diceView.setImageResource(R.drawable.blank_dice);
+                }
+
             }
         });
 
